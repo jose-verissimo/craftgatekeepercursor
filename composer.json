@@ -1,0 +1,46 @@
+{
+    "name": "cursor/craft-gatekeeper-cursor",
+    "description": "Protect your Craft CMS website from access with a universal password. Custom for Cursor.",
+    "type": "craft-plugin",
+    "version": "1.2.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "gatekeepercursor"
+    ],
+    "support": {
+        "docs": "https://github.com/cursor/craft-gatekeeper-cursor/blob/v1/README.md",
+        "issues": "https://github.com/cursor/craft-gatekeeper-cursor/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cursor",
+            "homepage": "http://cursor.co.uk"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "cursor\\gatekeepercursor\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Gatekeeper",
+        "handle": "craft-gatekeeper-cursor",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/cursor/craft-gatekeeper-cursor/v1/CHANGELOG.md",
+        "class": "cursor\\gatekeepercursor\\Gatekeeper"
+    }
+}

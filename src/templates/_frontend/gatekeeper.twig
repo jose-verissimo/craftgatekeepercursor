@@ -1,0 +1,156 @@
+{#
+/**
+ * Gatekeeper plugin for Craft CMS 3.x
+ *
+ * Gatekeeper Gatekeeper.twig
+ *
+ * @author    Cursor
+ * @copyright Copyright (c) 2020 Cursor
+ * @link      http://cursor.co.uk
+ * @package   Gatekeeper
+ * @since     1.0.0
+ */
+#}
+
+{% set hasLogo = (CraftEdition == CraftPro and craft.rebrand.isLogoUploaded ? true : false) %}
+{% set title = "Site Protected" %}
+{% set notice = craft.app.getModule('craft-gatekeeper-cursor').getSettings().notice %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }} | {{ systemName }}</title>
+    <style>
+        html {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        *,
+        *::before,
+        *::after {
+            -webkit-box-sizing: inherit;
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f1f5f8;
+            font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        }
+
+        .wrapper {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-form {
+            padding: 0 2rem 2rem;
+            background: #FFFFFF;
+            min-width: 364px;
+            border-radius: .25rem;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.10);
+        }
+
+        .logo {
+            margin: 1rem 0 1.75rem;
+        }
+
+        .login-form > h1 {
+            text-align: center;
+            margin: 1rem 0 1.75rem;
+            font-weight: 300;
+        }
+
+        .form-control {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-input {
+            padding: .5rem .75rem;
+            width: 100%;
+            color: #606f7b;
+            border-radius: .25rem;
+            border: 1px solid #dae1e7;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.10);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .form-error {
+            color: #e3342f;
+            font-size: .75rem;
+            font-style: italic;
+        }
+
+        .notice {
+            padding: 0 0 .75rem;
+            text-align: center;
+            color: #606f7b;
+            font-size: .875rem;
+            font-weight: 500;
+        }
+
+        label {
+            margin-bottom: .25rem;
+            display: block;
+            color: #606f7b;
+            font-size: .875rem;
+            font-weight: 500;
+        }
+
+        .buttons {
+            text-align: center;
+        }
+
+        .btn {
+            padding: .5rem 1rem;
+            color: #FFFFFF;
+            font-weight: 500;
+            cursor: pointer;
+            border: 0;
+            border-radius: .25rem;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#da5a47), to(#cc5643));
+            background-image: linear-gradient(#da5a47, #cc5643);
+        }
+
+        .btn:hover {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#bf503f), to(#b34b3b));
+            background-image: linear-gradient(#bf503f, #b34b3b);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form id="login-form" class="login-form" method="post" accept-charset="UTF-8">
+            {{ csrfInput() }}
+            <input type="hidden" name="action" value="craft-gatekeeper-cursor/gatekeeper/login">
+
+            {% if hasLogo %}
+                {% set logo = craft.rebrand.logo %}
+                <img src="{{ logo.url }}" width="{{ logo.width }}" height="{{ logo.height }}" class="logo">
+            {% else %}
+                <h1>{{ systemName }}</h1>
+            {% endif %}
+
+            {% if notice is defined %}<p class="notice">{{ notice }}</p>{% endif %}
+            
+            <div class="form-control">
+                <label for="password">{{ "Password" }}</label>
+                <input type="password" name="password" id="password" class="form-input" required>
+                {% if error is defined %}<p class="form-error">{{ "Invalid password" }}</p>{% endif %}
+            </div>
+
+            <div class="buttons">
+                <button id="submit" class="btn">{{ "Unlock" }}</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
