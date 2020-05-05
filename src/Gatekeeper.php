@@ -28,7 +28,7 @@ use yii\web\Cookie;
 /**
  * @author    Cursor
  * @package   Gatekeeper
- * @since     1.0.0
+ * @since     1.5.0
  *
  * @property  Settings $settings
  * @method    Settings getSettings()
@@ -54,7 +54,7 @@ class Gatekeeper extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.0.0';
+    public $schemaVersion = '1.5.0';
 
     // Public Methods
     // =========================================================================
@@ -133,7 +133,6 @@ class Gatekeeper extends Plugin
                 );
 
                 if ($this->settings->enabled && $this->isGuest() && !$this->isAuthenticated() && !$this->isGatekeeperRequest() && !$this->isSslCertificationRequest()) {
-                    echo 'tes'; exit;
                     $cookie = new Cookie(['name' => 'gatekeeper_referer']);
                     $cookie->value = Craft::$app->getRequest()->getUrl();
                     $cookie->expire = time() + 30;
