@@ -28,7 +28,7 @@ use yii\web\Cookie;
 /**
  * @author    Cursor
  * @package   Gatekeeper
- * @since     1.5.0
+ * @since     1.6.0
  *
  * @property  Settings $settings
  * @method    Settings getSettings()
@@ -54,7 +54,7 @@ class Gatekeeper extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.5.0';
+    public $schemaVersion = '1.6.0';
 
     // Public Methods
     // =========================================================================
