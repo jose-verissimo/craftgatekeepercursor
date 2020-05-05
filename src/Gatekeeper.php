@@ -54,7 +54,7 @@ class Gatekeeper extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.6.0';
+    public $schemaVersion = '1.8.0';
 
     // Public Methods
     // =========================================================================
@@ -133,6 +133,7 @@ class Gatekeeper extends Plugin
                 );
 
                 if ($this->settings->enabled && $this->isGuest() && !$this->isAuthenticated() && !$this->isGatekeeperRequest() && !$this->isSslCertificationRequest()) {
+                    
                     $cookie = new Cookie(['name' => 'gatekeeper_referer']);
                     $cookie->value = Craft::$app->getRequest()->getUrl();
                     $cookie->expire = time() + 30;
